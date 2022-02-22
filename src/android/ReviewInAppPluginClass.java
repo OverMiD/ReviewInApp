@@ -98,12 +98,12 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
             }
         });
 
-        Task<Void> flow = manager.launchReviewFlow(activity, reviewInfo);
-        flow.addOnCompleteListener(task -> {
+        //Task<Void> flow = manager.launchReviewFlow(activity, reviewInfo);
+        //flow.addOnCompleteListener(task -> {
             // The flow has finished. The API does not indicate whether the user
             // reviewed or not, or even whether the review dialog was shown. Thus, no
             // matter the result, we continue our app flow.
-        });
+        //});
 
     }
 }
