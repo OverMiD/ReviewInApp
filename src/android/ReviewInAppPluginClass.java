@@ -37,6 +37,15 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
 
             return true;
         }
+        else if (action.equals("requestReviewInApp")){
+
+            cordova.getThreadPool().execute(new Runnable() {
+                @Override
+                public void run() {
+                    requestReviewInApp(callbackContext);
+                }
+            });
+        }
         return false;
     }
 
