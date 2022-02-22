@@ -91,7 +91,8 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
     private void requestReviewInApp(CallbackContext callbackContext) {
 
         Log.d(LOG,"Inicia requestReviewInApp");
-        ReviewManager manager = ReviewManagerFactory.create(cordova.getContext());
+        //ReviewManager manager = ReviewManagerFactory.create(cordova.getContext());
+        ReviewManager manager = new FakeReviewManager(cordova.getContext());
         Task<ReviewInfo> request = manager.requestReviewFlow();
         request.addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
