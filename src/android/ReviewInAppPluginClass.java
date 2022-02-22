@@ -24,21 +24,16 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("requestReview")) {
-
             Boolean isFake = args.getBoolean(0);
-
             cordova.getThreadPool().execute(new Runnable() {
                 @Override
                 public void run() {
                     requestReview(isFake, callbackContext);
                 }
             });
-
-
             return true;
         }
         else if (action.equals("requestReviewInApp")){
-
             cordova.getThreadPool().execute(new Runnable() {
                 @Override
                 public void run() {
@@ -46,7 +41,18 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
                 }
             });
         }
-        return false;
+        else if (action.equals("requestReviewInAppFake")){
+            cordova.getThreadPool().execute(new Runnable() {
+                @Override
+                public void run() {
+                    requestReviewInAppFake(callbackContext);
+                }
+            });
+        }
+        else {
+            return false;
+        }
+
     }
 
     private void requestReview(Boolean isFake, CallbackContext callbackContext) {
@@ -91,8 +97,8 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
     private void requestReviewInApp(CallbackContext callbackContext) {
 
         Log.d(LOG,"Inicia requestReviewInApp");
-        //ReviewManager manager = ReviewManagerFactory.create(cordova.getContext());
-        ReviewManager manager = new FakeReviewManager(cordova.getContext());
+        ReviewManager manager = ReviewManagerFactory.create(cordova.getContext());
+        //ReviewManager manager = new FakeReviewManager(cordova.getContext());
         Task<ReviewInfo> request = manager.requestReviewFlow();
         request.addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -115,6 +121,37 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
             // The flow has finished. The API does not indicate whether the user
             // reviewed or not, or even whether the review dialog was shown. Thus, no
             // matter the result, we continue our app flow.
+        //});
+
+    }
+
+    private void requestReviewInAppFake(CallbackContext callbackContext) {
+
+        Log.d(LOG,"Inicia requestReviewInAppFake");
+        //ReviewManager manager = ReviewManagerFactory.create(cordova.getContext());
+        ReviewManager manager = new FakeReviewManager(cordova.getContext());
+        Task<ReviewInfo> request = manager.requestReviewFlow();
+        request.addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                // We can get the ReviewInfo object
+                Log.d(LOG,"Then");
+                ReviewInfo reviewInfo = task.getResult();
+                callbackContext.success();
+            } else {
+                // There was some problem, log or handle the error code.
+                //String reviewErrorCode =  task.getException().toString();
+                //@ReviewErrorCode int reviewErrorCode = ((TaskException) task.getException()).getErrorCode();
+                Log.d(LOG,"Else");
+                callbackContext.success();
+                //Log.d(LOG, reviewErrorCode);
+            }
+        });
+
+        //Task<Void> flow = manager.launchReviewFlow(activity, reviewInfo);
+        //flow.addOnCompleteListener(task -> {
+        // The flow has finished. The API does not indicate whether the user
+        // reviewed or not, or even whether the review dialog was shown. Thus, no
+        // matter the result, we continue our app flow.
         //});
 
     }

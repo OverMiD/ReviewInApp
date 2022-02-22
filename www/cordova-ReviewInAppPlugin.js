@@ -7,3 +7,7 @@ exports.requestReview = function (arg0, success, error) {
 exports.requestReviewInApp = function (success, error) {
     exec(success, error, 'cordova-ReviewInAppPlugin', 'requestReviewInApp', []);
 };
+
+exports.requestReviewInAppFake = function (success, error) {
+    exec(success, error, 'cordova-ReviewInAppPlugin', 'requestReviewInAppFake', []);
+};
