@@ -82,7 +82,7 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
     private void requestReviewInApp() {
 
         Log.d(LOG,"Inicia requestReviewInApp");
-        ReviewManager manager = ReviewManagerFactory.create(this);
+        ReviewManager manager = ReviewManagerFactory.create(cordova.getContext());
         Task<ReviewInfo> request = manager.requestReviewFlow();
         request.addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
