@@ -91,8 +91,10 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
                 ReviewInfo reviewInfo = task.getResult();
             } else {
                 // There was some problem, log or handle the error code.
-                @ReviewErrorCode int reviewErrorCode = ((TaskException) task.getException()).getErrorCode();
+                //String reviewErrorCode =  task.getException().toString();
+                //@ReviewErrorCode int reviewErrorCode = ((TaskException) task.getException()).getErrorCode();
                 Log.d(LOG,"Else");
+                //Log.d(LOG, reviewErrorCode);
             }
         });
 
