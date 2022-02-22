@@ -78,4 +78,30 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
             callbackContext.error(taskfail.getMessage());
         });
     }
+
+    private void requestReviewInApp() {
+
+        Log.d(LOG,"Inicia requestReviewInApp");
+        ReviewManager manager = ReviewManagerFactory.create(this);
+        Task<ReviewInfo> request = manager.requestReviewFlow();
+        request.addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                // We can get the ReviewInfo object
+                Log.d(LOG,"Then");
+                ReviewInfo reviewInfo = task.getResult();
+            } else {
+                // There was some problem, log or handle the error code.
+                @ReviewErrorCode int reviewErrorCode = ((TaskException) task.getException()).getErrorCode();
+                Log.d(LOG,"Else");
+            }
+        });
+
+        Task<Void> flow = manager.launchReviewFlow(activity, reviewInfo);
+        flow.addOnCompleteListener(task -> {
+            // The flow has finished. The API does not indicate whether the user
+            // reviewed or not, or even whether the review dialog was shown. Thus, no
+            // matter the result, we continue our app flow.
+        });
+
+    }
 }
