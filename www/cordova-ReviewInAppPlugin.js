@@ -4,6 +4,6 @@ exports.requestReview = function (arg0, success, error) {
     exec(success, error, 'cordova-ReviewInAppPlugin', 'requestReview', [arg0]);
 };
 
-exports.requestReviewInApp = function () {
-    console.log("Todo bien");
+exports.requestReviewInApp = function (success, error) {
+    exec(success, error, 'cordova-ReviewInAppPlugin', 'requestReviewInApp', []);
 };

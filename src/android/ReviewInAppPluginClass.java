@@ -79,7 +79,7 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
         });
     }
 
-    private void requestReviewInApp() {
+    private void requestReviewInApp(CallbackContext callbackContext) {
 
         Log.d(LOG,"Inicia requestReviewInApp");
         ReviewManager manager = ReviewManagerFactory.create(cordova.getContext());
@@ -89,11 +89,13 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
                 // We can get the ReviewInfo object
                 Log.d(LOG,"Then");
                 ReviewInfo reviewInfo = task.getResult();
+                callbackContext.success();
             } else {
                 // There was some problem, log or handle the error code.
                 //String reviewErrorCode =  task.getException().toString();
                 //@ReviewErrorCode int reviewErrorCode = ((TaskException) task.getException()).getErrorCode();
                 Log.d(LOG,"Else");
+                callbackContext.success();
                 //Log.d(LOG, reviewErrorCode);
             }
         });
