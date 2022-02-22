@@ -49,7 +49,7 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
                 }
             });
         }
-        
+
         return false;
     }
 
@@ -104,6 +104,7 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
                 Log.d(LOG,"Then");
                 ReviewInfo reviewInfo = task.getResult();
                 callbackContext.success();
+                Log.d(LOG,"Completado");
             } else {
                 // There was some problem, log or handle the error code.
                 //String reviewErrorCode =  task.getException().toString();
@@ -135,6 +136,7 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
                 Log.d(LOG,"Then");
                 ReviewInfo reviewInfo = task.getResult();
                 callbackContext.success();
+                Log.d(LOG,"Completado");
             } else {
                 // There was some problem, log or handle the error code.
                 //String reviewErrorCode =  task.getException().toString();
