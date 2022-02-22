@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="ReviewInAppPlugin" version="1.0">
+	<name>cordova-ReviewInAppPlugin</name>
+
+   	<js-module name="cordova-ReviewInAppPlugin" src="www/cordova-ReviewInAppPlugin.js">
+      	<clobbers target="cordova.plugins.ReviewInAppPlugin" />
+   	</js-module>
+
+    <engines>
+    	<engine name="cordova" version=">=9.0.0"/>
+        <engine name="cordova-android" version=">=8.0.0"/>
+        <engine name="cordova-ios" version=">=5.0.0"/>
+    </engines>
+
+   	<platform name="android">
+
+      	<config-file parent="/*" target="res/xml/config.xml">
+         	<feature name="cordova-ReviewInAppPlugin">
+            	<param name="android-package" value="ReviewInAppPlugin.ReviewInAppPluginClass" />
+         	</feature>
+      	</config-file>
+
+      	<config-file target="AndroidManifest.xml" parent="/*">
+        	<uses-permission android:name="android.permission.INTERNET" />
+        </config-file>
+
+		<config-file parent="/*" target="AndroidManifest.xml" />
+
+		<source-file src="src/android/ReviewInAppPluginClass.java" target-dir="src/ReviewInAppPlugin" />
+
+		<framework src="com.google.android.play:core:1.10.3" />
+   	</platform>
+
+
+
+</plugin>
