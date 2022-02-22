@@ -49,10 +49,8 @@ public class ReviewInAppPluginClass extends CordovaPlugin {
                 }
             });
         }
-        else {
-            return false;
-        }
-
+        
+        return false;
     }
 
     private void requestReview(Boolean isFake, CallbackContext callbackContext) {
